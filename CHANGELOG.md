@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Changed
+- Rewrite README.md for better readability and scalability (fixes #1)
+- Add Quick Reference table organized by submodule
+- Consolidate feature docs under a single "Feature Documentation" section
+
 ## [0.2.0] - 2026-03-09
 
 ### Added
