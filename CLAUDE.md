@@ -27,6 +27,11 @@
 ## Before Committing / Pushing
 - Always update `README.md` and `CHANGELOG.md` before committing or pushing
 
+## Releasing
+- Version is defined in TWO places: `pyproject.toml` and `src/jsi_tools/__init__.py` — update both
+- Tag format: `v0.X.0` — pushing a tag triggers `.github/workflows/release.yml` (build + PyPI publish)
+- After push: purge GitHub camo cache if badges are stale (`curl -X PURGE <camo-url>`)
+
 ## Adding a New Element
 1. Create file in appropriate submodule (e.g., `src/jsi_tools/decorators/new_thing.py`)
 2. Export in submodule `__init__.py`
