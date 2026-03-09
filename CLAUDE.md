@@ -17,11 +17,15 @@
 - Eager re-exports with `__all__` at every level
 - `from __future__ import annotations` in all modules
 - Runtime-only imports at top; typing imports in `TYPE_CHECKING` block
+- Immutable results: `tuple[T, ...]` for sequences, `frozenset` for sets, `MappingProxyType` for dicts
 
 ## Commands
 - `ruff check src/ tests/` — lint
 - `mypy src/` — type check (strict mode)
 - `python -m pytest tests/ -v` — run tests
+
+## Before Committing / Pushing
+- Always update `README.md` and `CHANGELOG.md` before committing or pushing
 
 ## Adding a New Element
 1. Create file in appropriate submodule (e.g., `src/jsi_tools/decorators/new_thing.py`)
@@ -33,3 +37,5 @@
 - Python 3.14: `asyncio.iscoroutinefunction` deprecated → use `inspect.iscoroutinefunction`
 - hatchling build-backend is `hatchling.build` (NOT `hatchling.backends`)
 - pytest-asyncio: `asyncio_mode = "auto"` — no need for `@pytest.mark.asyncio`
+- `@dataclass(slots=True)` requires Python 3.11+ — do NOT use (project targets >=3.10)
+- ruff I001: local imports with `as` alias must be one-per-line, not combined

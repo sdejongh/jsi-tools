@@ -7,7 +7,7 @@ packages = ["src/jsi_tools"]
 
 [project]
 name = "jsi-tools"
-version = "0.1.0"
+version = "0.2.0"
 description = "Personal Python utility library — decorators, helpers, classes, and utils."
 license = "GPL-3.0-only"
 requires-python = ">=3.10"

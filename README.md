@@ -65,6 +65,47 @@ Type info examples:
 | `None` | `None` |
 | `(generator)` | `generator` |
 
+## Helpers
+
+### `diff`
+
+Computes a structured diff between two collections of the same type. Supports lists, sets, frozensets, and dicts. Returns an immutable result object.
+
+```python
+from jsi_tools import diff
+
+# Lists — multiset semantics
+result = diff([1, 2, 2, 3], [2, 3, 4, 4])
+result.added    # (4, 4)
+result.removed  # (1, 2)
+result.common   # (2, 3)
+
+# Sets
+result = diff({"a", "b", "c"}, {"b", "c", "d"})
+result.added    # frozenset({"d"})
+result.removed  # frozenset({"a"})
+result.common   # frozenset({"b", "c"})
+
+# Dicts — tracks added, removed, changed, and unchanged keys
+result = diff({"a": 1, "b": 2, "c": 3}, {"b": 20, "c": 3, "d": 4})
+result.added     # {"d": 4}
+result.removed   # {"a": 1}
+result.changed   # {"b": (2, 20)}
+result.unchanged # {"c": 3}
+```
+
+**Return types:**
+
+| Input type | Return type | Fields |
+|---|---|---|
+| `list` | `ListDiff[T]` | `added`, `removed`, `common` (tuples) |
+| `set` / `frozenset` | `SetDiff[T]` | `added`, `removed`, `common` (frozensets) |
+| `dict` | `DictDiff[KT, VT]` | `added`, `removed`, `changed`, `unchanged` (read-only mappings) |
+
+All results are immutable (`frozen` dataclasses with immutable field types).
+
+Raises `TypeError` if types differ, are unsupported, or are tuples (with a hint to convert to list).
+
 ## Development
 
 ```bash
